@@ -1,0 +1,111 @@
+﻿@model PizzeriaOnline.ViewModel.ProduktViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Dodaj nowy produkt</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSave").click(function () {
+            SaveProdukt();
+        });
+    });
+
+    $(document).ready(function () {
+        $("#btnReset").click(function () {
+            ResetProdukt();
+        });
+    });
+
+    function ResetProdukt() {
+        $("#Id_kategori").val("");
+        $("#Kod").val("");
+        $("#Nazwa").val("");
+        $("#Opis").val("");
+        $("#Cena").val("");
+        $("#Opis").val("");
+        $("#Zdjecie").val("");
+    }
+
+    function SaveProdukt() {
+        var formData = new FormData();
+        formData.append("Id_kategori", $("#Id_kategori").val());
+        formData.append("Kod", $("#Kod").val());
+        formData.append("Nazwa", $("#Nazwa").val());
+        formData.append("Opis", $("#Opis").val());
+        formData.append("Cena", $("#Cena").val());
+        formData.append("Opis", $("#Opis").val());
+        formData.append("Zdjecie", $("#Zdjecie").get(0).files[0]);
+
+        $.ajax({
+            async: true,
+            dataType: 'JSON',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            url: '/Produkty/Create',
+            data: formData,
+            success: function (data) {
+                    alert(data.Message);
+                    ResetProdukt();
+            },
+            error: function () {
+                alert("Wystąpił problem w dodawaniu przedmiotu");
+            }
+        });
+    }
+</script>
+
+<div class="container">
+    <div class="col-md-4">
+        <div class="form-group">
+            Kategorie:
+            @Html.DropDownListFor(model => model.Id_kategori, new SelectList(Model.KategorieSelectListItems, "Value", "Text"),
+                                new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Kod:
+            @Html.TextBoxFor(model => model.Kod, new { @class = "form-control", autocomplete = "Off" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Nazwa:
+            @Html.TextBoxFor(model => model.Nazwa, new { @class = "form-control", autocomplete = "OFF" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Opis:
+            @Html.TextBoxFor(model => model.Opis, new { @class = "form-control", autocomplete = "OFF" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Cena:
+            @Html.TextBoxFor(model => model.Cena, new { @class = "form-control", autocomplete = "OFF" })
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="form-group">
+            Zdjęcie:
+            @Html.TextBoxFor(model => model.Zdjecie, new { type = "file", @class = "form-control" })
+        </div>
+    </div>
+
+    <div>
+
+        <Input type="button" value="Save" name="Zapisz" class="btn btn-primary" id="btnSave" />
+
+        <Input type="button" value="Reset" name="Reset" class="btn btn-danger" id="btnReset" />
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+﻿@model PizzeriaOnline.Models.Kategorie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id_kategori }) |
+    @Html.ActionLink("Wróć", "Index")
+</p>

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PizzeriaOnline.ViewModel.MenuViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+    function DodajDoKoszyka(item) {
+        var Id_produktu = $(item).attr("itemid");
+        //alert(Id_produktu);
+        var formData = new FormData();
+        formData.append("Id_produktu", Id_produktu);
+
+
+
+        $.ajax({
+            async: true,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: formData,
+            url: '/Menu/Index',
+            success: function (data) {
+                if (data.Success)
+                    $("#KoszykID").text("Koszyk(" + data.Counter + ")");
+            },
+            error: function () {
+                alert("Wystąpił błąd");
+            }
+        });
+    }
+</script>
+    <div class="container">
+        <h2 class="text-center">Menu</h2>
+
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4" style="border: 2px solid black">
+                <div style="text-align: center; border-bottom: 2px solid black">
+                    <h3> @item.Nazwa </h3>
+                </div>
+                <div>
+                    <div class="col-md-8">
+                        <img src="@Url.Content(item.Zdjecie)" height="150px" width="150px" />
+                    </div>
+                    <div class="col-md-4" style="text-align: left">
+                        <b>@item.Opis</b>
+                    </div>
+                </div>
+
+                <div class="col-md-8" style="font-size: 18px; border-top: 2px solid black; padding: 2px">
+                    <b>@item.Cena.ToString("#,##0.00 zł")</b>
+                </div>
+                <div class="col-md-4" style="text-align: right; margin-bottom:10px; border-top: 2px solid black; padding: 2px">
+
+                    <input type="button" name="DodajDoKoszyka" value="Do Koszyka" class="btn btn-primary" itemid="@item.Id_produktu" id="btnDodajDoKoszyka" onclick="DodajDoKoszyka(this)" />
+                </div>
+            </div>
+        }
+
+
+    </div>

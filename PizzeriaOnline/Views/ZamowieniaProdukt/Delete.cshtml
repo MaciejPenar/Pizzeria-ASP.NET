@@ -1,0 +1,63 @@
+﻿@model PizzeriaOnline.Models.ZamowieniaProdukt
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Usuń</h2>
+
+<div>
+    <h4>ZamowieniaProdukt</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_zamowienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_zamowienia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_produktu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_produktu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ilosc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ilosc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena_jednostkowa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena_jednostkowa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Suma)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Suma)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger" /> |
+            @Html.ActionLink("Wróć", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PizzeriaBazaKopiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="Id_adresu" />
+          </Key>
+          <Property Name="Id_adresu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numer_zamowienia" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Miejscowosc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Kod_pocztowy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nr_domu" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="Id_kategori" />
+          </Key>
+          <Property Name="Id_kategori" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produkt">
+          <Key>
+            <PropertyRef Name="Id_produktu" />
+          </Key>
+          <Property Name="Id_produktu" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Id_kategori" Type="int" Nullable="false" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="250" />
+          <Property Name="Cena" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Zdjecie" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="Id_zamowienia" />
+          </Key>
+          <Property Name="Id_zamowienia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data_zamowienia" Type="datetime" Nullable="false" />
+          <Property Name="Numer_zamowienia" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZamowieniaProdukt">
+          <Key>
+            <PropertyRef Name="Id_zamowieniaProdukt" />
+          </Key>
+          <Property Name="Id_zamowieniaProdukt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_zamowienia" Type="int" Nullable="false" />
+          <Property Name="Id_produktu" Type="varchar" MaxLength="550" Nullable="false" />
+          <Property Name="Ilosc" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cena_jednostkowa" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Suma" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PizzeriaBazaKopiaModelStoreContainer">
+          <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="Master" store:Type="Tables" />
+          <EntitySet Name="Produkt" EntityType="Self.Produkt" Schema="Master" store:Type="Tables" />
+          <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" Schema="Zamowienia" store:Type="Tables" />
+          <EntitySet Name="ZamowieniaProdukt" EntityType="Self.ZamowieniaProdukt" Schema="Zamowienia" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PizzeriaBazaKopiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="Id_kategori" />
+          </Key>
+          <Property Name="Id_kategori" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produkt">
+          <Key>
+            <PropertyRef Name="Id_produktu" />
+          </Key>
+          <Property Name="Id_produktu" Type="Guid" Nullable="false" />
+          <Property Name="Id_kategori" Type="Int32" Nullable="false" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Cena" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Zdjecie" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Zamowienia">
+          <Key>
+            <PropertyRef Name="Id_zamowienia" />
+          </Key>
+          <Property Name="Id_zamowienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data_zamowienia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Numer_zamowienia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ZamowieniaProdukt">
+          <Key>
+            <PropertyRef Name="Id_zamowieniaProdukt" />
+          </Key>
+          <Property Name="Id_zamowieniaProdukt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_zamowienia" Type="Int32" Nullable="false" />
+          <Property Name="Id_produktu" Type="String" MaxLength="550" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ilosc" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Cena_jednostkowa" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Suma" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PizzeriaOnlineBazaKopiaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kategorie" EntityType="Self.Kategorie" />
+          <EntitySet Name="Produkt" EntityType="Self.Produkt" />
+          <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" />
+          <EntitySet Name="ZamowieniaProdukt" EntityType="Self.ZamowieniaProdukt" />
+          <EntitySet Name="Adres" EntityType="PizzeriaBazaKopiaModel.Adres" />
+        </EntityContainer>
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="Id_adresu" />
+          </Key>
+          <Property Name="Id_adresu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numer_zamowienia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Miejscowosc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Kod_pocztowy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ulica" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nr_domu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PizzeriaBazaKopiaModelStoreContainer" CdmEntityContainer="PizzeriaOnlineBazaKopiaEntities">
+          <EntitySetMapping Name="Kategorie">
+            <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Kategorie">
+              <MappingFragment StoreEntitySet="Kategorie">
+                <ScalarProperty Name="Id_kategori" ColumnName="Id_kategori" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produkt">
+            <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Produkt">
+              <MappingFragment StoreEntitySet="Produkt">
+                <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+                <ScalarProperty Name="Id_kategori" ColumnName="Id_kategori" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Zdjecie" ColumnName="Zdjecie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zamowienia">
+            <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Zamowienia">
+              <MappingFragment StoreEntitySet="Zamowienia">
+                <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+                <ScalarProperty Name="Data_zamowienia" ColumnName="Data_zamowienia" />
+                <ScalarProperty Name="Numer_zamowienia" ColumnName="Numer_zamowienia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZamowieniaProdukt">
+            <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.ZamowieniaProdukt">
+              <MappingFragment StoreEntitySet="ZamowieniaProdukt">
+                <ScalarProperty Name="Id_zamowieniaProdukt" ColumnName="Id_zamowieniaProdukt" />
+                <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+                <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+                <ScalarProperty Name="Cena_jednostkowa" ColumnName="Cena_jednostkowa" />
+                <ScalarProperty Name="Suma" ColumnName="Suma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="Nr_domu" ColumnName="Nr_domu" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Kod_pocztowy" ColumnName="Kod_pocztowy" />
+                <ScalarProperty Name="Miejscowosc" ColumnName="Miejscowosc" />
+                <ScalarProperty Name="Numer_zamowienia" ColumnName="Numer_zamowienia" />
+                <ScalarProperty Name="Id_adresu" ColumnName="Id_adresu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

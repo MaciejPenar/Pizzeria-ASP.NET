@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PizzeriaOnline.Models.Zamowienia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <h2 class="text-center">Lista wszystkich zamówień</h2>
+
+    <div class="container" id="tbl">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data_zamowienia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Numer_zamowienia)
+                </th>
+                <th>
+                    <h4 font-weight: bold> Operacje </h4>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data_zamowienia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Numer_zamowienia)
+                    </td>
+                    <td>
+                        <div class="opercje">
+                            <input type="button" class="btn btn-info" value="Edytuj" onclick="location.href='@Url.Action( "Edit", new { id = item.Id_zamowienia })'" />
+
+
+                            <input type="button" class="btn btn-info" value="Szczegóły" onclick="location.href='@Url.Action( "Details", new { id = item.Id_zamowienia })'" />
+
+
+                            <input type="button" class="btn btn-info" value="Usuń" onclick="location.href='@Url.Action( "Delete", new { id = item.Id_zamowienia })'" />
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+        <p>
+            <input type="button" class="btn btn-primary" value="Dodaj zamówienie" onclick="location.href='@Url.Action( "Create", "Zamowienia")'" />
+          
+        </p>
+
+        <input type="button" class="buttonExport" value="Stwórz raport" onclick="Export()" />
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+        <script type="text/javascript">
+            function Export() {
+                html2canvas(document.getElementById('tbl'), {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL();
+                        var docDefinition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(docDefinition).download("Raport.pdf");
+                    }
+                });
+            }
+        </script>
+    </div>
+
+    <style>
+        .table {
+            background-color: #faeecd;
+        }
+
+        .opercje {
+            margin: 2px;
+            padding-top: 2px;
+        }
+
+        
+        </style>

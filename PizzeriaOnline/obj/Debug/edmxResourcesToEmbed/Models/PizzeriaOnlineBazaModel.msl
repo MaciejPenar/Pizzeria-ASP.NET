@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PizzeriaBazaKopiaModelStoreContainer" CdmEntityContainer="PizzeriaOnlineBazaKopiaEntities">
+    <EntitySetMapping Name="Kategorie">
+      <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Kategorie">
+        <MappingFragment StoreEntitySet="Kategorie">
+          <ScalarProperty Name="Id_kategori" ColumnName="Id_kategori" />
+          <ScalarProperty Name="Kod" ColumnName="Kod" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produkt">
+      <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Produkt">
+        <MappingFragment StoreEntitySet="Produkt">
+          <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+          <ScalarProperty Name="Id_kategori" ColumnName="Id_kategori" />
+          <ScalarProperty Name="Kod" ColumnName="Kod" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="Cena" ColumnName="Cena" />
+          <ScalarProperty Name="Zdjecie" ColumnName="Zdjecie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zamowienia">
+      <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Zamowienia">
+        <MappingFragment StoreEntitySet="Zamowienia">
+          <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+          <ScalarProperty Name="Data_zamowienia" ColumnName="Data_zamowienia" />
+          <ScalarProperty Name="Numer_zamowienia" ColumnName="Numer_zamowienia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZamowieniaProdukt">
+      <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.ZamowieniaProdukt">
+        <MappingFragment StoreEntitySet="ZamowieniaProdukt">
+          <ScalarProperty Name="Id_zamowieniaProdukt" ColumnName="Id_zamowieniaProdukt" />
+          <ScalarProperty Name="Id_zamowienia" ColumnName="Id_zamowienia" />
+          <ScalarProperty Name="Id_produktu" ColumnName="Id_produktu" />
+          <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+          <ScalarProperty Name="Cena_jednostkowa" ColumnName="Cena_jednostkowa" />
+          <ScalarProperty Name="Suma" ColumnName="Suma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Adres">
+      <EntityTypeMapping TypeName="PizzeriaBazaKopiaModel.Adres">
+        <MappingFragment StoreEntitySet="Adres">
+          <ScalarProperty Name="Nr_domu" ColumnName="Nr_domu" />
+          <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+          <ScalarProperty Name="Kod_pocztowy" ColumnName="Kod_pocztowy" />
+          <ScalarProperty Name="Miejscowosc" ColumnName="Miejscowosc" />
+          <ScalarProperty Name="Numer_zamowienia" ColumnName="Numer_zamowienia" />
+          <ScalarProperty Name="Id_adresu" ColumnName="Id_adresu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

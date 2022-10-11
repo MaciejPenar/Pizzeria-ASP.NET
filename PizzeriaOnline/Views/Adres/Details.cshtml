@@ -1,0 +1,58 @@
+﻿@model PizzeriaOnline.Models.Adres
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <h4>Adres</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Numer_zamowienia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Numer_zamowienia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Miejscowosc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miejscowosc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kod_pocztowy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kod_pocztowy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ulica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ulica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nr_domu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nr_domu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id_adresu }) |
+    @Html.ActionLink("Wróć", "Index")
+</p>

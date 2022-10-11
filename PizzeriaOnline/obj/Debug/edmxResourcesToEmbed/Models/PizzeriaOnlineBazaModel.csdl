@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PizzeriaBazaKopiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kategorie">
+    <Key>
+      <PropertyRef Name="Id_kategori" />
+    </Key>
+    <Property Name="Id_kategori" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nazwa" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Produkt">
+    <Key>
+      <PropertyRef Name="Id_produktu" />
+    </Key>
+    <Property Name="Id_produktu" Type="Guid" Nullable="false" />
+    <Property Name="Id_kategori" Type="Int32" Nullable="false" />
+    <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Opis" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Cena" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Zdjecie" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Zamowienia">
+    <Key>
+      <PropertyRef Name="Id_zamowienia" />
+    </Key>
+    <Property Name="Id_zamowienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Data_zamowienia" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Numer_zamowienia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ZamowieniaProdukt">
+    <Key>
+      <PropertyRef Name="Id_zamowieniaProdukt" />
+    </Key>
+    <Property Name="Id_zamowieniaProdukt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_zamowienia" Type="Int32" Nullable="false" />
+    <Property Name="Id_produktu" Type="String" MaxLength="550" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ilosc" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Cena_jednostkowa" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Suma" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="PizzeriaOnlineBazaKopiaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kategorie" EntityType="Self.Kategorie" />
+    <EntitySet Name="Produkt" EntityType="Self.Produkt" />
+    <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" />
+    <EntitySet Name="ZamowieniaProdukt" EntityType="Self.ZamowieniaProdukt" />
+    <EntitySet Name="Adres" EntityType="PizzeriaBazaKopiaModel.Adres" />
+  </EntityContainer>
+  <EntityType Name="Adres">
+    <Key>
+      <PropertyRef Name="Id_adresu" />
+    </Key>
+    <Property Name="Id_adresu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Numer_zamowienia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Miejscowosc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Kod_pocztowy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Ulica" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nr_domu" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

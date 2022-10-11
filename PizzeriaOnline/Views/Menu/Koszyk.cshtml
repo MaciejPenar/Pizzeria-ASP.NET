@@ -1,0 +1,76 @@
+﻿@model IEnumerable<PizzeriaOnline.ViewModel.KoszykModel>
+@{
+    ViewBag.Title = "Koszyk";
+    decimal DoZaplaty = 0.00M;
+}
+
+<h2 style="text-align: center">Koszyk</h2>
+
+
+@using (Html.BeginForm("AddZamowienia", "Menu", FormMethod.Post))
+{
+
+<table class="table-condensed" style="width: 100%">
+
+    <tr>
+        <th>
+            <h4> Zdjęcie </h4>
+        </th>
+        <th>
+            <h4> Nazwa </h4>
+        </th>
+        <th>
+            <h4 style="text-align: right"> Ilość </h4>
+        </th>
+        <th>
+            <h4 style="text-align: right"> Cena za 1 produkt </h4>
+        <th>
+            <h4 style="text-align: right"> Suma </h4>
+        </th>
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        DoZaplaty += item.Suma;
+        <tr>
+            <td>
+                <img src="@Url.Content(item.Zdjecie)" height="50px" width="50px" class="img-circle" />
+            </td>
+            <td>
+                @item.Nazwa
+            </td>
+            <td style="text-align:right">
+                @item.Ilosc.ToString(format: "#,##0")
+            </td>
+            <td style="text-align:right">
+                @item.Cena_jednostkowa.ToString(format: "#,##0.00")
+            </td>
+            <td style="text-align:right">
+                @item.Suma.ToString(format: "#,##0.00")
+            </td>
+        </tr>
+    }
+    <tr style="border-top: 2px solid maroon">
+        <td colspan="4" style="text-align:right">
+            <h3> Do zapłaty </h3>
+        </td>
+        <td style="text-align:right">
+            <h3>@DoZaplaty.ToString(format: "#,##0.00") </h3>
+        </td>
+    </tr>
+
+    <tr style="text-align: right">
+        <td colspan="5">
+            <input type="submit" value="Zapisz" name="Save" class="btn btn-primary" id="ZapiszZamowienie" />
+        </td>
+    </tr>
+
+    <tr style="text-align: center">
+        <td colspan="5">
+            @Html.ActionLink("Wróc do Menu", "Index", "Menu")
+        </td>
+    </tr>
+</table>
+}

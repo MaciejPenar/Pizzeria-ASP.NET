@@ -1,0 +1,101 @@
+﻿@model PizzeriaOnline.Models.AdminUserViewModel
+
+@using PizzeriaOnline.Controllers
+@using System.Globalization
+
+@{
+    var totalUsers = AdminController.usrList.ToList().Count();
+    int num = 0;
+}
+<h3>Liczba użytkowników: @totalUsers</h3>
+<br />
+
+
+<table class="table">
+    <tr>
+        <th style="text-align: center">Nr</th>
+        <th style="text-align: center">Nazwa</th>
+        <th style="text-align: center">Ranga</th>
+        <th style="text-align: center">Opcje</th>
+        <th></th>
+    </tr>
+    @foreach (var usr in AdminController.usrList)
+    {
+        ViewBag.UserName =
+        CultureInfo.CurrentCulture.TextInfo.ToTitleCase(usr.UserName);
+        ViewBag.UserFullName =
+        CultureInfo.CurrentCulture.TextInfo.ToTitleCase(usr.UserFullName);
+        num++;
+        <tr>
+            <td>@num</td>
+            <td>@ViewBag.UserName</td>
+            <td>@usr.RankName</td>
+            <td>
+                @using (Html.BeginForm("EditUser", "Admin",
+                FormMethod.Post, new { @role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@usr.UserId" />
+                    <input type="submit" class="btn-info"
+                           value="Edytuj" />
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+@*
+<table class="row">
+    <tr>
+        <th class="tblnum">Nr</th>
+        <th>Nazwa</th>
+        <th>Ranga</th>
+        <th>Opcje</th>
+    </tr>
+    @foreach (var usr in AdminController.usrList)
+    {
+        ViewBag.UserName =
+        CultureInfo.CurrentCulture.TextInfo.ToTitleCase(usr.UserName);
+        ViewBag.UserFullName =
+        CultureInfo.CurrentCulture.TextInfo.ToTitleCase(usr.UserFullName);
+        num++;
+        <tr>
+            <td class="tblnum">@num</td>
+            <td title="@ViewBag.UserFullName">@ViewBag.UserName</td>
+            <td>@usr.RankName</td>
+            <td>
+                @using (Html.BeginForm("EditUser", "Admin",
+                FormMethod.Post, new { @role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="@usr.UserId" />
+                    <input type="submit" class="btn-info"
+                           value="Edytuj" />
+                }
+            </td>
+        </tr>
+    }
+</table>*@
+<style>
+    .row {
+        background-color: #faeecd;
+    }
+
+    .opercje {
+        margin: 2px;
+        padding-top: 2px;
+    }
+
+    .shadowbox {
+        border: 1px solid #333;
+        box-shadow: 8px 8px 5px #444;
+        text-align: center;
+        padding: 4px 24px;
+        background-image: linear-gradient(180deg, #bbd0ffe3, #ddd 40%, #cccccca1);
+    }
+
+    .table {
+        text-align: center;
+        line-height: 400px;
+    }
+</style>

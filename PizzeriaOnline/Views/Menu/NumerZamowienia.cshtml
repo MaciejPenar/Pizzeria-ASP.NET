@@ -1,0 +1,14 @@
+﻿@model IEnumerable<PizzeriaOnline.Models.Zamowienia>
+
+@{
+    ViewBag.Title = "NumerZamowienia";
+}
+
+<h3>Zamówienie zostało złożone</h3>
+<h3>Numer twojego zamowienia --- @Model.Last().Numer_zamowienia</h3>
+<br/><br />
+<p>
+
+    <h4> Jeśli chcesz dodać adres dostawy @Html.ActionLink("kliknij tutaj", "DodajAdres")</h4>
+    <h4> Uwaga ! skopiuj numer zamówienia </h4>
+</p>
